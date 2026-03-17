@@ -1,19 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
 import { Role } from "../enums/role.enum";
-
-export class User {
+export declare class User {
     id: number;
-
-    @ApiProperty()
     isAdmin: boolean;
-
-    // ...other properties
-
-    @ApiProperty()
     roles: Role[];
 }
-
-export class Article {
+export declare class Article {
     id: number;
     isPublished: boolean;
     authorId: number;

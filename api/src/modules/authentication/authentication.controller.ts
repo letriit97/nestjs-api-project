@@ -17,8 +17,6 @@ export class AuthenticationController {
         // this.catsService.create(createCatDto);
     }
 
-
-
     @Post('upload')
     @UseInterceptors(FileInterceptor('file'))
     uploadFile(  @UploadedFile(new FileSizeValidationPipe()  ) file: Express.Multer.File): void {

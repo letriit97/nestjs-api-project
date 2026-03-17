@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerConfiguration } from './_core/configs/swagger.config';
 
 declare const module: any;
 async function bootstrap() {
@@ -10,16 +10,11 @@ async function bootstrap() {
   // app.enableCors();
   //#endregion
 
-  //#region ======= SWAGGER =======
-  const config = new DocumentBuilder()
-    .addBearerAuth()
-    .setTitle('System Manager API')
-    .setDescription('Document API Swaggers')
-    .setVersion('1.0.0')
-    .addTag('System Manager')
-    .build();
-  SwaggerModule.setup('api', app, SwaggerModule.createDocument(app, config));
-  //#endregion
+  if (process.env.NODE_ENV === 'development') {
+    //#region ======= SWAGGER =======
+    SwaggerConfiguration(app);
+    //#endregion
+  }
 
   //#region ======= Healthchecks (Terminus) =======
 

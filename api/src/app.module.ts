@@ -3,8 +3,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerModule } from '@nestjs/throttler/dist/throttler.module';
 import { RolesGuard } from './_core/guards/roles.guard';
 
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { HealthModule } from './modules/health/health.module';
 
 
 
@@ -19,13 +19,11 @@ import { join } from 'path';
         },
       ],
     }),
-
-    // Static File
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'client'),
-    }),
+    AuthenticationModule,
+    HealthModule,
   ],
-  controllers: [],
+  controllers: [
+  ],
   providers: [
     {
       provide: APP_GUARD,
